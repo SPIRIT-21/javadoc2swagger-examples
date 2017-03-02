@@ -1,0 +1,219 @@
+{
+    "basePath": "/example/api/v1",
+    "paths": {
+        "/type/{id}": {
+            "post": {
+                "description": "This method is not allowed.",
+                "operationId": "posttype{id}",
+                "responses": {"405": {"description": "Method not allowed"}},
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "format": "long",
+                    "type": "number",
+                    "required": true
+                }],
+                "tags": [
+                    "type",
+                    "type{id}"
+                ]
+            },
+            "get": {
+                "produces": [
+                    "application/json;charset=utf-8",
+                    "application/atom+xml"
+                ],
+                "description": "Returns the type with the specific id",
+                "operationId": "gettype{id}",
+                "responses": {
+                    "200": {
+                        "schema": {"$ref": "#/definitions/Type"},
+                        "description": "Type entity found"
+                    },
+                    "500": {"description": "An error occured while request"},
+                    "404": {"description": "Type entity not found"}
+                },
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "format": "long",
+                    "type": "number",
+                    "required": true
+                }],
+                "tags": [
+                    "type",
+                    "type{id}"
+                ]
+            },
+            "delete": {
+                "description": "Deletes the type with the specific id",
+                "operationId": "deletetype{id}",
+                "responses": {
+                    "200": {"description": "Type entity deleted successfully"},
+                    "500": {"description": "An error occured while delete"}
+                },
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "format": "long",
+                    "type": "number",
+                    "required": true
+                }],
+                "tags": [
+                    "type",
+                    "type{id}"
+                ]
+            },
+            "put": {
+                "produces": ["application/json"],
+                "description": "Updates the Type with the specific id",
+                "operationId": "puttype{id}",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "array",
+                            "items": {"$ref": "#/definitions/Type"}
+                        },
+                        "description": "Type entity updated successfully"
+                    },
+                    "500": {"description": "An error occured while update"}
+                },
+                "parameters": [
+                    {
+                        "schema": {"$ref": "#/definitions/Type"},
+                        "in": "body",
+                        "name": "type",
+                        "description": "Type description ",
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "test",
+                        "format": "long",
+                        "description": "test query parameter ",
+                        "type": "number"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "format": "long",
+                        "type": "number",
+                        "required": true
+                    }
+                ],
+                "consumes": ["application/json"],
+                "tags": [
+                    "type",
+                    "type{id}"
+                ]
+            }
+        },
+        "/types": {
+            "post": {
+                "produces": ["application/json"],
+                "description": "Creates a new type",
+                "operationId": "posttypes",
+                "responses": {
+                    "201": {
+                        "schema": {"$ref": "#/definitions/Type"},
+                        "description": "Type entity created successfully"
+                    },
+                    "400": {"description": "An error occurred while validation"}
+                },
+                "parameters": [{
+                    "schema": {"$ref": "#/definitions/Type"},
+                    "in": "body",
+                    "name": "type",
+                    "description": "Type entity ",
+                    "required": true
+                }],
+                "consumes": ["application/json"],
+                "tags": ["types"]
+            },
+            "get": {
+                "produces": ["application/json"],
+                "description": "",
+                "operationId": "gettypes",
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "array",
+                            "items": {"$ref": "#/definitions/Type"}
+                        },
+                        "description": "Type entities found"
+                    },
+                    "500": {"description": "An error occured while request"}
+                },
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "description": "name of type or null ",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "createdAt",
+                        "description": "creation date range or null ",
+                        "type": "string"
+                    }
+                ],
+                "tags": ["types"]
+            },
+            "delete": {
+                "description": "This method is not allowed. When requesting the HTTP status 405 will return",
+                "operationId": "deletetypes",
+                "responses": {"405": {"description": "Method not allowed"}},
+                "tags": ["types"]
+            },
+            "put": {
+                "description": "This method is not allowed. When requesting the HTTP status 405 will return",
+                "operationId": "puttypes",
+                "responses": {"405": {"description": "Method not allowed"}},
+                "tags": ["types"]
+            }
+        }
+    },
+    "host": "localhost:8080",
+    "definitions": {"Type": {
+        "type": "object",
+        "properties": {
+            "createdAt": {
+                "format": "date-time",
+                "type": "string"
+            },
+            "codes": {
+                "type": "array",
+                "items": {
+                    "format": "long",
+                    "type": "number"
+                }
+            },
+            "byteString": {
+                "format": "byte",
+                "type": "string"
+            },
+            "bool": {"type": "boolean"},
+            "name": {"type": "string"},
+            "id": {
+                "format": "long",
+                "type": "number"
+            },
+            "something": {
+                "type": "array",
+                "items": {"type": "string"}
+            }
+        }
+    }},
+    "swagger": "2.0",
+    "info": {
+        "description": "Not existing API for demonstrating the javadoc2swagger-maven-plugin",
+        "title": "Example API",
+        "version": "0.0.1-SNAPSHOT"
+    },
+    "tags": [
+        {"name": "type"},
+        {"name": "type{id}"},
+        {"name": "types"}
+    ]
+}
